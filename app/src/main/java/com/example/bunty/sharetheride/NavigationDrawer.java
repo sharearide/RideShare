@@ -38,6 +38,7 @@ public class NavigationDrawer extends AppCompatActivity
 
 
 
+
     String TITLES[] = {"User Profile",
             "Home",
             "Find A Ride",
