@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.example.bunty.sharetheride.Adapter.AdapterData;
 import com.example.bunty.sharetheride.AdapterDecorate.DividerItemDecoration;
-import com.example.bunty.sharetheride.Fragments.EditPersonalDetails;
+import com.example.bunty.sharetheride.Fragments.Home;
 import com.example.bunty.sharetheride.Fragments.Find_A_Ride;
 
 /**
@@ -257,8 +257,8 @@ public class NavigationDrawer extends AppCompatActivity
 
 
             case 0:
-                EditPersonalDetails editPersonalDetails = new EditPersonalDetails();
-                fragmentTransaction.replace(R.id.frag, editPersonalDetails);
+                Home home = new Home();
+                fragmentTransaction.replace(R.id.frag, home);
 /*                if(!U_name.equals("")) {
                     getSupportActionBar().setTitle(U_name);
                 }*/

@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingTop="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context="com.example.bunty.sharetheride.Fragments.Find_A_Ride">
+    tools:context="com.example.bunty.sharetheride.Fragments.Find_A_Ride"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"

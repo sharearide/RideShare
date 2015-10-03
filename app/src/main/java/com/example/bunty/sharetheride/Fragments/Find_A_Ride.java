@@ -3,6 +3,7 @@ package com.example.bunty.sharetheride.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +91,7 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
 
 
             case R.id.Fsearch:
+
                 break;
 
             case R.id.Fdate:

@@ -1,8 +1,8 @@
-<ScrollView
+<!--<ScrollView
     android:layout_height="match_parent"
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent">-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_marginLeft="10dp"
@@ -11,6 +11,7 @@
     android:layout_height="match_parent"
     >
 
+<!--
 
 
     <FrameLayout
@@ -158,35 +159,36 @@
         android:layout_below="@+id/editpolicestation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+-->
 
 
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Update"
+        android:text="Offer A Ride"
 
         android:textColor="#FFFFFF"
 
         android:background="@drawable/rounded_edittext"
-        android:id="@+id/editupdate"
-        android:layout_below="@+id/Ugender"
+        android:id="@+id/OfeerRide"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="Find A Ride"
 
         android:textColor="#FFFFFF"
 
         android:background="@drawable/rounded_edittext"
-        android:id="@+id/edit"
+        android:id="@+id/FindRide"
         android:layout_gravity="right"
-        android:layout_below="@+id/Ugender"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
-</ScrollView>
+<!--
+</ScrollView>-->

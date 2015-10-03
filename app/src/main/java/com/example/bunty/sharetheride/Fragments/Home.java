@@ -1,51 +1,25 @@
 package com.example.bunty.sharetheride.Fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.bunty.sharetheride.AdapterDecorate.RoundImage;
-import com.example.bunty.sharetheride.NavigationDrawer;
 import com.example.bunty.sharetheride.R;
-import com.soundcloud.android.crop.Crop;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditPersonalDetails extends Fragment implements View.OnClickListener {
+public class Home extends Fragment implements View.OnClickListener {
 
+
+    Button OfferARide,FindRide;
+/*
 
     EditText name, number, email_id, address, landmark;
     Button update, edit;
@@ -72,9 +46,10 @@ public class EditPersonalDetails extends Fragment implements View.OnClickListene
     private static File file;
     String set;
     private Target loadtarget;
+*/
 
 
-    public EditPersonalDetails() {
+    public Home() {
 
     }
 
@@ -83,13 +58,27 @@ public class EditPersonalDetails extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_edit_personal_details, container, false);
-        setTheLayout(v);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        //setTheLayout(v);
+        OfferARide= (Button) v.findViewById(R.id.OfeerRide);
+        FindRide = (Button) v.findViewById(R.id.FindRide);
+        OfferARide.setOnClickListener(this);
 
         return v;
     }
 
-    private void setTheLayout(View v) {
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+/*    private void setTheLayout(View v) {
 
         name = (EditText) v.findViewById(R.id.editname);
         number = (EditText) v.findViewById(R.id.editno);
@@ -141,7 +130,7 @@ public class EditPersonalDetails extends Fragment implements View.OnClickListene
         Log.d("uid is", uid);
         String ss = shared.getString("Iset", "0");
 
-/*if(ss.equals("0")) {
+*//*if(ss.equals("0")) {
     new LoadImage().execute(U_image);
     uimage.setVisibility(View.VISIBLE);
     progressDialog.setVisibility(View.GONE);
@@ -154,7 +143,7 @@ ImageView img;
     progressDialog.setVisibility(View.GONE);
     uimage.setImageDrawable(roundedImage);
 
-}*/
+}*//*
 
 
         if (!uid.equals("")) {
@@ -201,15 +190,15 @@ ImageView img;
         }
 
         Toast.makeText(getActivity(), "value of i is" + i, Toast.LENGTH_SHORT).show();
-/*if(i!=1) {
+*//*if(i!=1) {
 
 
-}else {*/
+}else {*//*
         String i = shared.getString("image", "null");
         if (i.equals("null")) {
-            /*Bitmap bmp = BitmapFactory.decodeFile(i);
+            *//*Bitmap bmp = BitmapFactory.decodeFile(i);
             //ImageView img;
-            roundedImage = new RoundImage(bmp);*/
+            roundedImage = new RoundImage(bmp);*//*
             uimage.setImageResource(R.drawable.user);
             progressDialog.setVisibility(View.GONE);
 
@@ -219,11 +208,11 @@ ImageView img;
         } else {
             //new LoadImage().execute(U_image);
 loadBitmap(U_image);
-/*            Bitmap.createBitmap(Picasso.with(getActivity())
+*//*            Bitmap.createBitmap(Picasso.with(getActivity())
                     .load(U_image)
                     .placeholder(R.drawable.user)
 
-                    .error(R.drawable.user));*/
+                    .error(R.drawable.user));*//*
                     ;
 
 
@@ -269,10 +258,10 @@ loadBitmap(U_image);
         uimage.setImageDrawable(roundedImage);
         progressDialog.setVisibility(View.GONE);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    /*--- you can select your preferred CompressFormat and quality.
-     * I'm going to use JPEG and 100% quality ---*/
+    *//*--- you can select your preferred CompressFormat and quality.
+     * I'm going to use JPEG and 100% quality ---*//*
         b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-    /*--- create a new file on SD card ---*/
+    *//*--- create a new file on SD card ---*//*
         file = new File(Environment.getExternalStorageDirectory()
                 + File.separator + U_id + ".jpg");
         try {
@@ -280,7 +269,7 @@ loadBitmap(U_image);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    /*--- create a new FileOutputStream and write bytes to file ---*/
+    *//*--- create a new FileOutputStream and write bytes to file ---*//*
         try {
             fos = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
@@ -479,13 +468,13 @@ loadBitmap(U_image);
                 uimage.setImageDrawable(roundedImage);
 
 
-                /*--- this method will save your downloaded image to SD card ---*/
+                *//*--- this method will save your downloaded image to SD card ---*//*
 
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    /*--- you can select your preferred CompressFormat and quality.
-     * I'm going to use JPEG and 100% quality ---*/
+    *//*--- you can select your preferred CompressFormat and quality.
+     * I'm going to use JPEG and 100% quality ---*//*
                 image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-    /*--- create a new file on SD card ---*/
+    *//*--- create a new file on SD card ---*//*
                 file = new File(Environment.getExternalStorageDirectory()
                         + File.separator + U_id + ".jpg");
                 try {
@@ -493,7 +482,7 @@ loadBitmap(U_image);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-    /*--- create a new FileOutputStream and write bytes to file ---*/
+    *//*--- create a new FileOutputStream and write bytes to file ---*//*
                 try {
                     fos = new FileOutputStream(file);
                 } catch (FileNotFoundException e) {
@@ -517,5 +506,5 @@ loadBitmap(U_image);
 
             }
         }
-    }
+    }*/
 }
