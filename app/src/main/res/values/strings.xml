@@ -10,12 +10,9 @@
     <string-array name="tabs">
 
         <item>CAR</item>
-        <item>UBER</item>
-        <item>OLA</item>
+        <item>Two Wheeler</item>
         <item>BUS</item>
-        <item>ACTIVA</item>
-        <item>BIKE</item>
-        <item>AUTO</item>
+
 
     </string-array>
 </resources>

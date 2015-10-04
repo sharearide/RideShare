@@ -39,6 +39,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
         viewPager= (ViewPager) v.findViewById(R.id.viewPager);
         ViewPagerAdapter adapter=new ViewPagerAdapter(getFragmentManager());
 
+
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -47,6 +48,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
                 tabHost.setSelectedNavigationItem(position);
             }
         });
+
 
         for (int i = 0; i < adapter.getCount(); i++) {
             tabHost.addTab(
@@ -78,8 +80,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
     }
 
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter
-    {
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -87,16 +88,34 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
 
         @Override
         public Fragment getItem(int position) {
-            Home home=new Home();
-return home;
+            Fragment fragment=null;
 
-            }
+            switch(position)
+            {
+            case 0:
+            fragment= Search_Results_Car.newInstance("", "");
+                break;
 
 
+                case 1:
+                    fragment= Search_Result_Two_Wheeler.newInstance("", "");
+
+                    break;
+
+
+                case 2:
+                    fragment= Search_Result_Bus.newInstance("", "");
+
+                    break;
+
+
+        }
+return fragment;
+    }
 
         @Override
         public int getCount() {
-            return 7;
+            return 3;
         }
 
         @Override

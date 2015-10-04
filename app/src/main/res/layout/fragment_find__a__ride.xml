@@ -35,6 +35,7 @@
         android:id="@+id/Fsource"
         android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:hint="Source"
@@ -72,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:hint="Destination"
+        android:singleLine="true"
         />
 
     <ImageButton

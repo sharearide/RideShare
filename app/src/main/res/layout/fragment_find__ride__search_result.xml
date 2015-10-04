@@ -9,8 +9,7 @@
         android:id="@+id/materialTabHost"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-
-
+        app:primaryColor="#0277BD"
         app:textColor="#FFFFFF"
         />
 

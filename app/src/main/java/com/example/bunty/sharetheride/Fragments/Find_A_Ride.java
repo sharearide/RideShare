@@ -54,10 +54,23 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
     private SimpleDateFormat dateFormatter;
     PlacesTask placesTask;
     ParserTask parserTask;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    Geocoder geoCoder;
+
+
     public Find_A_Ride() {
         // Required empty public constructor
     }
 
+    public static Find_A_Ride newInstance(String param1, String param2) {
+       Find_A_Ride fragment = new Find_A_Ride();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -179,8 +192,13 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
             String Date=Fdate.getText().toString();
             String source=Fsource.getText().toString();
             String destination=Fdestination.getText().toString();
-            convertAddress(Fsource.getText().toString());
+            Log.d("data","date is"+Date+"source is"+source+"destination is"+destination);
+            convertAddress(source);
 
+        }
+        else
+        {
+            Toast.makeText(getActivity(),"enter all the data",Toast.LENGTH_SHORT).show();
         }
 
 
@@ -189,22 +207,48 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
     }
 
     public void convertAddress(String address) {
-        if (address != null && !address.isEmpty()) {
+
+        Geocoder gc = new Geocoder(getActivity(), Locale.getDefault());
+        String result = "";
+        Address address1 = null, address_d = null;
+        // LatLng src_pts = new LatLng(0,0);
+        //LatLng dest_pts= new LatLng(0,0);
+        //finding Source and Destination names's  Lat,Long
+        try {
+            List addressList = gc.getFromLocationName(address, 1);
+            if (addressList != null && addressList.size() > 0) {
+                address1 = (Address) addressList.get(0);
+                StringBuilder sb = new StringBuilder();
+                sb.append(address1.getLatitude()).append("\n");
+                sb.append(address1.getLongitude()).append("\n");
+                result = sb.toString();
+                Log.d("lat long",result);
+                //src_pts = new LatLng(address.getLatitude(),address.getLongitude());
+            }
+
+
+        /*if (address != null && !address.isEmpty()) {
             try {
-                Geocoder geoCoder=null;
-                List<Address> addressList = geoCoder.getFromLocationName(address, 1);
+
+                Log.d("address is",address);
+                List<Address> addressList = geoCoder.getFromLocationName(address, 5);
+                Log.d("size of list is",addressList.size()+"");
                 if (addressList != null && addressList.size() > 0) {
                     double lat = addressList.get(0).getLatitude();
                     double lng = addressList.get(0).getLongitude();
-                    Toast.makeText(getContext(),""+lat+""+lng,Toast.LENGTH_SHORT).show();
+                    Log.d("source lat long is", "" + lat + "" + lng);
+//                    Toast.makeText(getContext(),""+lat+""+lng,Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             } // end catch
-        } // end if
-    } // end convert
-
-    @Override
+        }*/ // end if
+        } // end convert
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        @Override
     public void onFocusChange(View view, boolean b) {
         if(b)
         {
