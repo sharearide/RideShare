@@ -1,4 +1,4 @@
-package com.example.bunty.sharetheride;
+package com.example.bunty.sharetheride.AutoComplete;
 
 import android.content.Context;
 import android.util.AttributeSet;
