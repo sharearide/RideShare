@@ -24,15 +24,17 @@ import android.widget.TextView;
 
 import com.example.bunty.sharetheride.Adapter.AdapterData;
 import com.example.bunty.sharetheride.AdapterDecorate.DividerItemDecoration;
-import com.example.bunty.sharetheride.Fragments.Home;
 import com.example.bunty.sharetheride.Fragments.Find_A_Ride;
+import com.example.bunty.sharetheride.Fragments.Find_Ride_Search_Result;
+import com.example.bunty.sharetheride.Fragments.Home;
+import com.example.bunty.sharetheride.Interfaces.Communicator;
 
 /**
  * Created by Femion-3 on 06/07/2015.
  */
 
 
-public class NavigationDrawer extends AppCompatActivity
+public class NavigationDrawer extends AppCompatActivity implements Communicator
 //        implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks
 {
 
@@ -140,6 +142,11 @@ public class NavigationDrawer extends AppCompatActivity
 
 
             }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
         });
 
 
@@ -185,7 +192,7 @@ public class NavigationDrawer extends AppCompatActivity
     }
 
     private void setTheFragments() {
-        displaydata(0);
+        displaydata(1);
  /*       Intent intent = getIntent();
         pos = intent.getIntExtra("position", -1);
         x1=intent.getIntExtra("new", -1);
@@ -257,18 +264,30 @@ public class NavigationDrawer extends AppCompatActivity
 
 
             case 0:
-                Home home = new Home();
-                fragmentTransaction.replace(R.id.frag, home);
+
+          /*      Home home = new Home();
+                fragmentTransaction.replace(R.id.frag,home);*/
+                //fragmentTransaction.replace(R.id.frag, home,"");
 /*                if(!U_name.equals("")) {
                     getSupportActionBar().setTitle(U_name);
                 }*/
-                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
 
 
                 break;
 
 
             case 1:
+
+                Home f1 = new Home();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, f1).commit();
+
+
+
+                //fragmentTransaction.replace(R.id.frag, find_ride_search_result);
+               /* getSupportActionBar().setTitle("Select Worker");
+                fragmentTransaction.commit();*/
+
 /*
                 Intent intent = new Intent(this, Scan.class);
                 startActivity(intent);*/
@@ -278,10 +297,13 @@ public class NavigationDrawer extends AppCompatActivity
 
 
             case 2:
+
                 Find_A_Ride find_a_ride=new Find_A_Ride();
-                fragmentTransaction.replace(R.id.frag, find_a_ride);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_a_ride).commit();
+                /*fragmentTransaction.replace(R.id.frag, find_a_ride);
                 getSupportActionBar().setTitle("Select Worker");
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
 
 
 
@@ -289,6 +311,8 @@ public class NavigationDrawer extends AppCompatActivity
 
 
             case 3:
+                Find_Ride_Search_Result find_ride_search_result=new Find_Ride_Search_Result();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_ride_search_result).commit();
 
 
                 break;
@@ -420,6 +444,11 @@ public class NavigationDrawer extends AppCompatActivity
         super.onPostCreate(savedInstanceState);
 
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void Data() {
+     //   Find_Ride_Search_Result find_ride_search_result=getFragmentManager().findFragmentById()
     }
 
     /*@Override

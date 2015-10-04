@@ -2,13 +2,16 @@ package com.example.bunty.sharetheride.Fragments;
 
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.bunty.sharetheride.Interfaces.Communicator;
 import com.example.bunty.sharetheride.R;
 
 
@@ -19,6 +22,8 @@ public class Home extends Fragment implements View.OnClickListener {
 
 
     Button OfferARide,FindRide;
+    Communicator com;
+
 /*
 
     EditText name, number, email_id, address, landmark;
@@ -63,6 +68,7 @@ public class Home extends Fragment implements View.OnClickListener {
         OfferARide= (Button) v.findViewById(R.id.OfeerRide);
         FindRide = (Button) v.findViewById(R.id.FindRide);
         OfferARide.setOnClickListener(this);
+        FindRide.setOnClickListener(this);
 
         return v;
     }
@@ -70,11 +76,24 @@ public class Home extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        com= (Communicator) activity;
 
     }
 
     @Override
     public void onClick(View view) {
+        switch(view.getId())
+        {
+            case R.id.FindRide:
+                //com.Data();
+                Find_A_Ride fragment2 = new Find_A_Ride();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frag, fragment2);
+                fragmentTransaction.commit();
+                break;
+
+        }
 
     }
 

@@ -2,9 +2,10 @@ package com.example.bunty.sharetheride.Fragments;
 
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,11 +92,15 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
 
 
             case R.id.Fsearch:
-
+                Find_Ride_Search_Result find_ride_search_result = new Find_Ride_Search_Result();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.findARide,find_ride_search_result);
+                fragmentTransaction.commit();
                 break;
-
             case R.id.Fdate:
                 FPickDate.show();
+                break;
 
         }
     }

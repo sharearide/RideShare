@@ -5,4 +5,6 @@ package com.example.bunty.sharetheride.Interfaces;
  */
 public interface Communicator {
 
+    public void Data();
+
 }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="20dp"
+    android:id="@+id/findARide"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     tools:context="com.example.bunty.sharetheride.Fragments.Find_A_Ride"

@@ -2,17 +2,27 @@ package com.example.bunty.sharetheride.Fragments;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bunty.sharetheride.R;
 
+import it.neokree.materialtabs.MaterialTab;
+import it.neokree.materialtabs.MaterialTabHost;
+import it.neokree.materialtabs.MaterialTabListener;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Find_Ride_Search_Result extends Fragment {
+public class Find_Ride_Search_Result extends Fragment implements MaterialTabListener {
+
+    private MaterialTabHost tabHost;
+    private ViewPager viewPager;
 
 
     public Find_Ride_Search_Result() {
@@ -24,8 +34,75 @@ public class Find_Ride_Search_Result extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find__ride__search_result, container, false);
+        View v = inflater.inflate(R.layout.fragment_find__ride__search_result, container, false);
+        tabHost= (MaterialTabHost) v.findViewById(R.id.materialTabHost);
+        viewPager= (ViewPager) v.findViewById(R.id.viewPager);
+        ViewPagerAdapter adapter=new ViewPagerAdapter(getFragmentManager());
+
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // when user do a swipe the selected tab change
+                tabHost.setSelectedNavigationItem(position);
+            }
+        });
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            tabHost.addTab(
+                    tabHost.newTab()
+                            .setText(adapter.getPageTitle(i))
+                            .setTabListener(this)
+            );
+        }
+
+
+
+        return v;
+
+    }
+
+    @Override
+    public void onTabSelected(MaterialTab materialTab) {
+        viewPager.setCurrentItem(materialTab.getPosition());
+    }
+
+    @Override
+    public void onTabReselected(MaterialTab materialTab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(MaterialTab materialTab) {
+
     }
 
 
+    private class ViewPagerAdapter extends FragmentPagerAdapter
+    {
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Home home=new Home();
+return home;
+
+            }
+
+
+
+        @Override
+        public int getCount() {
+            return 7;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return getResources().getStringArray(R.array.tabs)[position];
+         //   return "one";
+        }
+    }
 }
