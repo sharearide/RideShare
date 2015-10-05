@@ -4,7 +4,7 @@ package com.example.bunty.sharetheride.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +28,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
     public Find_Ride_Search_Result() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -80,7 +81,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
     }
 
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);

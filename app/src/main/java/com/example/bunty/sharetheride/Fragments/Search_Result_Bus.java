@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
 import com.example.bunty.sharetheride.R;
 
 /**
@@ -28,6 +30,7 @@ public class Search_Result_Bus extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView SeachView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,9 +68,28 @@ public class Search_Result_Bus extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        View v=inflater.inflate(R.layout.fragment_search__results, container, false);
+
+        SeachView = (RecyclerView) v.findViewById(R.id.rv);
+        SeachView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        SeachView.setHasFixedSize(true);
+        AdapterSearchResult adapterSearchResult = new AdapterSearchResult(getActivity());
+        //DoJsonParsing();
+
+        SeachView.setAdapter(adapterSearchResult);
+
+        Bundle b=getArguments();
+        if(b!=null) {
+//            Log.d("ride type is", b.getString("ride"));
+            // Log.d("position is", b.getInt("position") + "");
+        }
+           /* result= (ListView) v.findViewById(R.id.listView);
+        ArrayAdapter<String> l=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
+        result.setAdapter(l);
+        result.setOnItemClickListener(this);*/
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

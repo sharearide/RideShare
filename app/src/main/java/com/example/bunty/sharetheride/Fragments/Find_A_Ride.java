@@ -7,6 +7,8 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -168,15 +170,29 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
 
 
             case R.id.Fsearch:
-                /*Find_Ride_Search_Result find_ride_search_result = new Find_Ride_Search_Result();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.findARide,find_ride_search_result);
-                fragmentTransaction.commit();*/
-                checkEntries();
+                //Find_A_Ride find_a_ride=new Find_A_Ride();
+
+                FragmentManager fragmentManager=getFragmentManager();
+               FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+               /* Intent i=new Intent(getActivity(), NavigationDrawer.class);
+                i.putExtra("Fsearch",true);
+                startActivity(i);*/
+
+                Find_Ride_Search_Result find_ride_search_result=new Find_Ride_Search_Result();
+
+// /                fragmentTransaction.replace(R.id.findARide,find_ride_search_result).commit();
+                fragmentTransaction
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.findride,find_ride_search_result)
+                        ;
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+//                checkEntries();
 
 
-
+                /*Intent i=new Intent(getActivity(), FindRideActivity.class);
+                startActivity(i);
+*/
                 break;
             case R.id.Fdate:
                 FPickDate.show();

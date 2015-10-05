@@ -4,14 +4,23 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
+import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
+import com.example.bunty.sharetheride.Network.GetData;
 import com.example.bunty.sharetheride.R;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +30,7 @@ import com.example.bunty.sharetheride.R;
  * Use the {@link Search_Results_Car#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Search_Results_Car extends Fragment implements AdapterView.OnItemClickListener{
+public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,8 +39,10 @@ public class Search_Results_Car extends Fragment implements AdapterView.OnItemCl
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ListView result;
-    String data[]={"A","B","C"};
+    /*ListView result;
+    String data[]={"A","B","C"};*/
+    RecyclerView SeachView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,7 +69,7 @@ public class Search_Results_Car extends Fragment implements AdapterView.OnItemCl
     {
         Search_Results_Car fragment = new Search_Results_Car();
         Bundle args = new Bundle();
-            args.putInt("position",position);
+            args.putInt("position", position);
         //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -83,16 +94,55 @@ public class Search_Results_Car extends Fragment implements AdapterView.OnItemCl
         // Inflate the layout for this fragment
 
         View v=inflater.inflate(R.layout.fragment_search__results, container, false);
+
+        SeachView = (RecyclerView) v.findViewById(R.id.rv);
+        swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        SeachView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        SeachView.setHasFixedSize(true);
+        AdapterSearchResult adapterSearchResult = new AdapterSearchResult(getActivity());
+        DoJsonParsing();
+
+        SeachView.setAdapter(adapterSearchResult);
+
         Bundle b=getArguments();
         if(b!=null) {
 //            Log.d("ride type is", b.getString("ride"));
            // Log.d("position is", b.getInt("position") + "");
         }
-            result= (ListView) v.findViewById(R.id.listView);
+           /* result= (ListView) v.findViewById(R.id.listView);
         ArrayAdapter<String> l=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
         result.setAdapter(l);
-        result.setOnItemClickListener(this);
+        result.setOnItemClickListener(this);*/
+
+
         return v;
+    }
+
+    private void DoJsonParsing() {
+        RequestParams requestParams=new RequestParams();
+        requestParams.add("Date","04-08-2015");
+        requestParams.add("Source","Nityanand Nagar, Mumbai, Maharashtra");
+        requestParams.add("Destination","Nityanand Nagar, Mumbai, Maharashtra");
+        GetData.post("", requestParams, new BaseJsonHttpResponseHandler<JSONObject>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
+                Log.d("data is", response + "");
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
+
+            }
+
+            @Override
+            protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                return jsonObject;
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -120,9 +170,27 @@ public class Search_Results_Car extends Fragment implements AdapterView.OnItemCl
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onRefresh() {
+        refreshItems();
 
     }
+
+    void refreshItems() {
+        // Load items
+        // ...
+
+        // Load complete
+        onItemsLoadComplete();
+    }
+
+    void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
+
+        // Stop refresh animation
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

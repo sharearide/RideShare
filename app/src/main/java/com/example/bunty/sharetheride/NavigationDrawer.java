@@ -192,7 +192,17 @@ public class NavigationDrawer extends AppCompatActivity implements Communicator
     }
 
     private void setTheFragments() {
-        displaydata(1);
+        Intent intent=getIntent();
+        boolean fsearch=intent.getBooleanExtra("Fsearch",false);
+        if(fsearch)
+        {
+            callToFindRideSearchResult();
+        }
+
+else {
+            displaydata(1);
+        }
+
  /*       Intent intent = getIntent();
         pos = intent.getIntExtra("position", -1);
         x1=intent.getIntExtra("new", -1);
@@ -217,6 +227,13 @@ public class NavigationDrawer extends AppCompatActivity implements Communicator
                 displaydata(0); // 2 is your fragment's number for "CollectionFragment"
             }
         }*/
+    }
+
+    private void callToFindRideSearchResult() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Find_Ride_Search_Result find_ride_search_result = new Find_Ride_Search_Result();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_ride_search_result).commit();
     }
 
     private void setProfileName() {
