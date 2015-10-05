@@ -27,7 +27,7 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
     @Override
     public ViewHolderSearch onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = layoutInflater.inflate(R.layout.each_user_view, parent, false);
+        View view = layoutInflater.inflate(R.layout.each_user_view1, parent, false);
         ViewHolderSearch viewHolderSearch = new ViewHolderSearch(view);
         return viewHolderSearch;
 
@@ -50,6 +50,8 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
 
 TextView Uname,Uwork,Useat,Ucar,Ufare,Utime,Usource,Udestination;
         public ViewHolderSearch(View itemView) {
+
+
 
             super(itemView);
             CardView cv = (CardView) itemView.findViewById(R.id.cv);
