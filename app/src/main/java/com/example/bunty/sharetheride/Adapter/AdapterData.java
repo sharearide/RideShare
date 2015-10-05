@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bunty.sharetheride.AdapterDecorate.RoundImage;
-import com.example.bunty.sharetheride.NavigationDrawer;
+import com.example.bunty.sharetheride.Main.NavigationDrawer;
 import com.example.bunty.sharetheride.R;
 
 import java.io.InputStream;
