@@ -1,10 +1,10 @@
 package com.example.bunty.sharetheride.Fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,12 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
+import com.example.bunty.sharetheride.Each_User;
 import com.example.bunty.sharetheride.Network.GetData;
 import com.example.bunty.sharetheride.R;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -30,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
  * Use the {@link Search_Results_Car#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class Search_Results_Car extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,7 +47,11 @@ public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.O
     /*ListView result;
     String data[]={"A","B","C"};*/
     RecyclerView SeachView;
-    SwipeRefreshLayout swipeRefreshLayout;
+//    SwipeRefreshLayout swipeRefreshLayout;
+    AdapterSearchResult adapterSearchResult;
+//    Each_User each_user=new Each_User();
+    ArrayList<Each_User> each_users=new ArrayList<>();
+    ProgressDialog progressDialog;
 
     private OnFragmentInteractionListener mListener;
 
@@ -96,12 +105,17 @@ public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.O
         View v=inflater.inflate(R.layout.fragment_search__results, container, false);
 
         SeachView = (RecyclerView) v.findViewById(R.id.rv);
-        swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
+  //      swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+
         SeachView.setLayoutManager(new LinearLayoutManager(getActivity()));
         SeachView.setHasFixedSize(true);
-        AdapterSearchResult adapterSearchResult = new AdapterSearchResult(getActivity());
+        adapterSearchResult = new AdapterSearchResult(getActivity());
+        progressDialog=new ProgressDialog(getActivity());
+  //      swipeRefreshLayout.setOnRefreshListener(this);
+
         DoJsonParsing();
+
+
 
         SeachView.setAdapter(adapterSearchResult);
 
@@ -120,14 +134,76 @@ public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.O
     }
 
     private void DoJsonParsing() {
-        RequestParams requestParams=new RequestParams();
+
+
+        final RequestParams requestParams=new RequestParams();
         requestParams.add("Date","04-08-2015");
         requestParams.add("Source","Nityanand Nagar, Mumbai, Maharashtra");
-        requestParams.add("Destination","Nityanand Nagar, Mumbai, Maharashtra");
+        requestParams.add("Destination", "Nityanand Nagar, Mumbai, Maharashtra");
         GetData.post("", requestParams, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 Log.d("data is", response + "");
+
+                progressDialog.setMessage("Fetching The File....");
+                progressDialog.show();
+
+                try {
+                    Each_User each_user=new Each_User();
+                    JSONArray rides=response.getJSONArray("rides");
+
+                    for(int i=0;i<rides.length();i++) {
+                        JSONObject data = rides.getJSONObject(i);
+                        String Uname=data.getString("id");
+                        String source=data.getString("source");
+                        String destination=data.getString("destination");
+                        String time=data.getString("time");
+                        String seats=data.getString("seats");
+                        String fare=data.getString("fare");
+                        Log.d("parsed data is", Uname + source + destination + time + seats + fare);
+
+                        each_user.setUname(Uname);
+                        each_user.setUsource(source);
+                        each_user.setUdestination(destination);
+                        each_user.setUtime(time);
+                        each_user.setUseat(seats);
+                        each_user.setUfare(fare);
+
+                        each_users.add(each_user);
+
+                        adapterSearchResult.SetData(each_users);
+
+
+                        Log.d("list size is",each_users.size()+"");
+
+
+
+                    }
+
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+/*
+                {
+                    "error": 0,
+                        "rides": [
+                    {
+                        "id": "7",
+                            "userId": "1",
+                            "source": "AWADHPURI",
+                            "destination": "MP NAGAR",
+                            "date": "2015-09-19",
+                            "time": "06:59:59",
+                            "latitude": "23.2376957",
+                            "longitude": "77.4927514",
+                            "vehicleId": "1",
+                            "seats": "0",
+                            "fare": "0",
+                            "status": "0",
+                            "timestamp": "0000-00-00 00:00:00"
+                    },*/
 
             }
 
@@ -168,7 +244,7 @@ public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.O
         super.onDetach();
         mListener = null;
     }
-
+/*
     @Override
     public void onRefresh() {
         refreshItems();
@@ -189,7 +265,7 @@ public class Search_Results_Car extends Fragment implements SwipeRefreshLayout.O
 
         // Stop refresh animation
         swipeRefreshLayout.setRefreshing(false);
-    }
+    }*/
 
 
     /**

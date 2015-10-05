@@ -4,12 +4,16 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.bunty.sharetheride.Each_User;
 import com.example.bunty.sharetheride.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by bunty on 10/5/2015.
@@ -17,11 +21,19 @@ import com.example.bunty.sharetheride.R;
 public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResult.ViewHolderSearch> {
     private LayoutInflater layoutInflater;
     Context context;
+    ArrayList<Each_User> each_users=new ArrayList<>();
     public AdapterSearchResult(FragmentActivity activity) {
 
         layoutInflater = LayoutInflater.from(activity);
         this.context = activity;
 
+    }
+
+    public void SetData(ArrayList<Each_User> each_users1)
+    {
+        this.each_users=each_users1;
+        Log.d("array size in setdata is",each_users1.size()+"");
+        notifyItemRangeChanged(0, each_users.size());
     }
 
     @Override
@@ -35,6 +47,10 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
 
     @Override
     public void onBindViewHolder(ViewHolderSearch holder, int position) {
+        Log.d("on bind position",position+"");
+        Each_User each_user2=each_users.get(position);
+        holder.Uname.setText(each_user2.getUname());
+
 
     }
 
@@ -42,7 +58,9 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
 
     @Override
     public int getItemCount() {
-        return 3;
+             return each_users.size();
+
+//        return 2;
     }
 
 
