@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#c7c1c1" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:nestedScrollingEnabled="true">
+    <RelativeLayout android:id="@+id/sourceDestinationLayout" android:background="#FFFFFF" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="15.0dip" android:textColor="#4780e1" android:id="@+id/startingWhenLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SELECT SOURCE AND DESTINATION" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:id="@+id/line" android:background="#d8d2d2" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="9.0dip" android:layout_marginTop="15.0dip" android:layout_marginBottom="52.0dip" android:layout_below="@+id/startingWhenLabel" android:layout_alignTop="@+id/startLocationLayout" android:layout_alignBottom="@+id/endLocationLayout" />
+        <include android:id="@+id/startLocationLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_below="@+id/startingWhenLabel" layout="@layout/offer_stop_list_item" />
+        <LinearLayout android:orientation="vertical" android:id="@+id/stopOversParentLayout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/startLocationLayout" />
+        <include android:id="@+id/endLocationLayout" android:layout_marginTop="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/stopOversParentLayout" layout="@layout/offer_stop_list_item" />
+        <include android:id="@+id/stopOverLayout" android:layout_width="fill_parent" android:layout_marginTop="5.0dip" android:layout_height="wrap_content" android:layout_below="@+id/endLocationLayout" layout="@layout/offer_stop_over_list_item" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/returnJourneyLayout" android:background="#FFFFFF" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="25.0dip" android:layout_below="@+id/sourceDestinationLayout">
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="15.0dip" android:textColor="#4780e1" android:id="@+id/isReturningLabel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="IS THIS A RETURNING JOURNEY?" android:layout_toLeftOf="@+id/isReturningSwitcher" android:layout_alignParentLeft="true" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="15.0dip" android:textColor="#4780e1" android:id="@+id/startDateTimeLabel" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="START DATE AND TIME" android:layout_below="@+id/isReturningLabel" />
+        <EditText android:textSize="12.0dip"
+            android:textColorHint="#d8d2d2" android:inputType="date"
+            android:editable="false"
+            android:id="@+id/startDateTimeEditText" android:paddingLeft="30.0dip"
+            android:paddingRight="30.0dip"  android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="10.0dip"
+            android:hint="Journey Date and Time"
+            android:layout_below="@+id/startDateTimeLabel" />
+       <!-- <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="20.0dip" android:textColor="#817a7a" android:id="@+id/startDateCalender" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="" android:layout_below="@+id/startDateTimeLabel" android:layout_alignBaseline="@+id/startDateTimeEditText" android:layout_alignParentLeft="true" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="12.0dip" android:textColor="#d8d2d2" android:id="@+id/startTimeDropDown" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="" android:layout_below="@+id/startDateTimeLabel" android:layout_alignBaseline="@+id/startDateTimeEditText" android:layout_alignParentRight="true" />-->
+        <android.support.v7.widget.SwitchCompat android:theme="@style/Widget.AppCompat.CompoundButton.Switch" android:id="@+id/isReturningSwitcher" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:textOn="YES" android:textOff="NO" android:layout_alignParentRight="true"
+            android:checked="false" />
+       <!-- <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="20.0dip" android:textColor="#4780e1" android:id="@+id/returningWhenLabel" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="RETURN DATE  TIME" android:layout_below="@+id/startDateTimeEditText" />
+        <com.example.bunty.sharetheride.commonui.RydeEditText android:textSize="18.0dip" android:textColorHint="#d8d2d2" android:id="@+id/returnDateTimeEditText" android:paddingLeft="30.0dip" android:paddingRight="30.0dip" android:focusable="false" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:hint="Return Date and Time" android:layout_below="@+id/returningWhenLabel" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="20.0dip" android:textColor="#817a7a" android:id="@+id/returnDateCalender" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="" android:layout_below="@+id/returningWhenLabel" android:layout_alignBaseline="@+id/returnDateTimeEditText" android:layout_alignParentLeft="true" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="18.0dip" android:textColor="#d8d2d2" android:id="@+id/returnTimeDropDown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="" android:layout_below="@+id/returningWhenLabel" android:layout_alignBaseline="@+id/returnDateTimeEditText" android:layout_alignParentRight="true" />-->
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/repeatRelativeLayout" android:background="#FFFFFF" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="25.0dip" android:layout_below="@+id/returnJourneyLayout">
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="15.0dip" android:textColor="#4780e1" android:id="@+id/isRepeatingLabel" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="I'll BE TRAVELLING MULTIPLE TIMES" android:layout_toLeftOf="@+id/isRepeatingSwitcher" android:layout_alignParentLeft="true" />
+        <android.support.v7.widget.SwitchCompat android:theme="@style/Widget.AppCompat.CompoundButton.Switch" android:id="@+id/isRepeatingSwitcher" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="YES" android:textOff="NO" android:layout_alignParentRight="true" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="10.0dip" android:textColor="#d8d2d2" android:id="@+id/repeatInfo" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="Switch On if you travel on this route on regular basis" android:maxLines="2" android:layout_toLeftOf="@+id/isRepeatingSwitcher" android:layout_below="@+id/isRepeatingSwitcher" android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:layout_below="@+id/repeatRelativeLayout"
+        android:text="Next"
+        android:textSize="25.0dip"
+        android:background="#4780e1"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5.0dip"/>
+</RelativeLayout>

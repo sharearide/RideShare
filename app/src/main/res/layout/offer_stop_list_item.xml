@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/test_page"
+        android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="18.0dip"
+            android:textColor="#d8d2d2"
+            android:id="@+id/itemIcon"
+            android:layout_width="30.0dip"
+            android:layout_height="wrap_content"
+            android:text="" android:layout_centerVertical="true" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView
+            android:textSize="15.0dip"
+            android:textColor="#696464"
+            android:id="@+id/fromLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dip"
+            android:text="FROM " android:layout_toLeftOf="@+id/crossIcon" android:layout_toRightOf="@+id/itemIcon" />
+        <com.example.bunty.sharetheride.AutoComplete.CustomAutoCompleteTextView
+            android:textSize="15.0dip"
+            android:textColor="#000000" android:textColorHint="#d8d2d2"
+            android:id="@+id/currentLocation"
+            android:paddingRight="30.0dip"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dip" android:hint="Source"
+            android:singleLine="true"
+            android:layout_toRightOf="@+id/itemIcon"
+            android:layout_below="@+id/fromLabel" />
+        <com.example.bunty.sharetheride.commonui.RydeTextView android:textSize="20.0dip" android:textColor="#d8d2d2" android:gravity="right|center" android:id="@+id/crossIcon" android:layout_width="30.0dip" android:layout_height="wrap_content" android:text="" android:layout_below="@id/fromLabel" android:layout_alignBottom="@+id/currentLocation" android:layout_alignParentRight="true" />
+    </RelativeLayout>
+    <com.example.bunty.sharetheride.commonui.RydeTextView android:layout_width="0.0dip" android:layout_height="0.0dip" android:layout_marginTop="20.0dip" />
+</RelativeLayout>
