@@ -65,7 +65,7 @@ public class Home extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         //setTheLayout(v);
-        OfferARide= (Button) v.findViewById(R.id.OfeerRide);
+        OfferARide= (Button) v.findViewById(R.id.OfferRide);
         FindRide = (Button) v.findViewById(R.id.FindRide);
         OfferARide.setOnClickListener(this);
         FindRide.setOnClickListener(this);
@@ -90,6 +90,13 @@ public class Home extends Fragment implements View.OnClickListener {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frag, fragment2);
+                fragmentTransaction.commit();
+                break;
+            case R.id.OfferRide:
+                Offer_a_Ride fragment3 = new Offer_a_Ride();
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frag,fragment3);
                 fragmentTransaction.commit();
                 break;
 
