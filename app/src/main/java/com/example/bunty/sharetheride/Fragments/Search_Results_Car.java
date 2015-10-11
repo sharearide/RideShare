@@ -149,10 +149,11 @@ public class Search_Results_Car extends Fragment {
                 progressDialog.show();
 
                 try {
-                    Each_User each_user=new Each_User();
+
                     JSONArray rides=response.getJSONArray("rides");
 
                     for(int i=0;i<rides.length();i++) {
+                        Each_User each_user=new Each_User();
                         JSONObject data = rides.getJSONObject(i);
                         String Uname=data.getString("id");
                         String source=data.getString("source");
