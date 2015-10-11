@@ -8,36 +8,28 @@
     android:elevation="7dp">
 
 
-
-
-
     <LinearLayout
+        android:id="@+id/frag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/frag">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/tool_bar"
-            layout="@layout/tool_bar"
-            >
+            layout="@layout/tool_bar">
 
         </include>
 
 
-
-
         <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
 
-            <!--android:orientation="vertical"-->
-            <!--android:id="@+id/fra"-->
-            <!--></LinearLayout>-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/fra"-->
+        <!--></LinearLayout>-->
 
-            </LinearLayout>
-
-
+    </LinearLayout>
 
 
     <android.support.v7.widget.RecyclerView
