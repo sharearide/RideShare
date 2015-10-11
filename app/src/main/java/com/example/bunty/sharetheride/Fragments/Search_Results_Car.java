@@ -101,7 +101,8 @@ public class Search_Results_Car extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+Log.d("on create view ","of card result called");
+        each_users.clear();
         View v=inflater.inflate(R.layout.fragment_search__results, container, false);
 
         SeachView = (RecyclerView) v.findViewById(R.id.rv);
@@ -119,11 +120,11 @@ public class Search_Results_Car extends Fragment {
 
         SeachView.setAdapter(adapterSearchResult);
 
-        Bundle b=getArguments();
-        if(b!=null) {
+//        Bundle b=getArguments();
+  //      if(b!=null) {
 //            Log.d("ride type is", b.getString("ride"));
            // Log.d("position is", b.getInt("position") + "");
-        }
+    //    }
            /* result= (ListView) v.findViewById(R.id.listView);
         ArrayAdapter<String> l=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
         result.setAdapter(l);
@@ -172,7 +173,7 @@ public class Search_Results_Car extends Fragment {
 
                         each_users.add(each_user);
 
-                        adapterSearchResult.SetData(each_users);
+
 
 
                         Log.d("list size is",each_users.size()+"");
@@ -181,7 +182,8 @@ public class Search_Results_Car extends Fragment {
 
                     }
 
-                    progressDialog.dismiss();
+      //              progressDialog.dismiss();
+                    adapterSearchResult.SetData(each_users);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -205,6 +207,7 @@ public class Search_Results_Car extends Fragment {
                             "status": "0",
                             "timestamp": "0000-00-00 00:00:00"
                     },*/
+
 
             }
 

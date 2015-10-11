@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
 import com.example.bunty.sharetheride.R;
 
 /**
@@ -68,15 +66,15 @@ public class Search_Result_Two_Wheeler extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_search__results, container, false);
+        View v=inflater.inflate(R.layout.fragment_home, container, false);
 
-        SeachView = (RecyclerView) v.findViewById(R.id.rv);
+        /*SeachView = (RecyclerView) v.findViewById(R.id.rv);
         SeachView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SeachView.setHasFixedSize(true);
-        AdapterSearchResult adapterSearchResult = new AdapterSearchResult(getActivity());
+        SeachView.setHasFixedSize(true);*/
+//        AdapterSearchResult adapterSearchResult = new AdapterSearchResult(getActivity());
         //DoJsonParsing();
 
-        SeachView.setAdapter(adapterSearchResult);
+  //      SeachView.setAdapter(adapterSearchResult);
 
         Bundle b=getArguments();
         if(b!=null) {

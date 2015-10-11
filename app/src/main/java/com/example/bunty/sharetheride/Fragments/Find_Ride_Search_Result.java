@@ -4,8 +4,9 @@ package com.example.bunty.sharetheride.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,7 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
     }
 
 
-    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -89,23 +90,27 @@ public class Find_Ride_Search_Result extends Fragment implements MaterialTabList
 
         @Override
         public Fragment getItem(int position) {
+            Log.d("fragment position is",position+"");
             Fragment fragment=null;
 
             switch(position)
             {
             case 0:
+                Log.d("call to","fagment 1");
             fragment= Search_Results_Car.newInstance("", "");
                 break;
 
 
                 case 1:
+                    Log.d("call to","fagment 2");
                     fragment= Search_Result_Two_Wheeler.newInstance("", "");
 
                     break;
 
 
                 case 2:
-                    fragment= Search_Result_Bus.newInstance("", "");
+                    Log.d("call to","fagment 3");
+                   fragment= Search_Result_Bus.newInstance("", "");
 
                     break;
 
