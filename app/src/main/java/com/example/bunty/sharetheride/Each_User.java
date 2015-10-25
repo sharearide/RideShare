@@ -1,14 +1,26 @@
 package com.example.bunty.sharetheride;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by bunty on 10/5/2015.
  */
-public class Each_User {
+public class Each_User implements Parcelable{
 
     String Uname,Uwork,Useat,Ucar,Ufare,Utime,Usource,Udestination;
 
-    public Each_User()
+    public Each_User(String uame,String uwork,String useat,String ucar,String ufare,String utime,String usource,String udestination)
     {
+
+        this.Uname = uame;
+        this.Uwork = uwork;
+        this.Useat = useat;
+        this.Ucar = ucar;
+        this.Ufare = ufare;
+        this.Utime = utime;
+        this.Usource = usource;
+        this.Udestination = udestination;
 
     }
 
@@ -77,4 +89,47 @@ public class Each_User {
         return Ucar;
 
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Uname);
+        dest.writeString(Uwork);
+        dest.writeString(Useat);
+        dest.writeString(Ucar);
+        dest.writeString(Ufare);
+        dest.writeString(Utime);
+        dest.writeString(Usource);
+        dest.writeString(Udestination);
+
+
+    }
+
+    private Each_User(Parcel in){
+        this.Uname = in.readString();
+        this.Uwork = in.readString();
+        this.Useat = in.readString();
+        this.Ucar = in.readString();
+        this.Ufare = in.readString();
+        this.Utime = in.readString();
+        this.Usource = in.readString();
+        this.Udestination = in.readString();
+    }
+
+    public static final Parcelable.Creator<Each_User> CREATOR = new Parcelable.Creator<Each_User>() {
+
+        @Override
+        public Each_User createFromParcel(Parcel source) {
+            return new Each_User(source);
+        }
+
+        @Override
+        public Each_User[] newArray(int size) {
+            return new Each_User[size];
+        }
+    };
 }

@@ -2,15 +2,19 @@ package com.example.bunty.sharetheride.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
 import com.example.bunty.sharetheride.Each_User;
@@ -47,10 +51,10 @@ public class Search_Results_Car extends Fragment {
     /*ListView result;
     String data[]={"A","B","C"};*/
     RecyclerView SeachView;
-//    SwipeRefreshLayout swipeRefreshLayout;
+    //    SwipeRefreshLayout swipeRefreshLayout;
     AdapterSearchResult adapterSearchResult;
-//    Each_User each_user=new Each_User();
-    ArrayList<Each_User> each_users=new ArrayList<>();
+    //    Each_User each_user=new Each_User();
+    ArrayList<Each_User> each_users = new ArrayList<>();
     ProgressDialog progressDialog;
 
     private OnFragmentInteractionListener mListener;
@@ -78,7 +82,7 @@ public class Search_Results_Car extends Fragment {
     {
         Search_Results_Car fragment = new Search_Results_Car();
         Bundle args = new Bundle();
-            args.putInt("position", position);
+        args.putInt("position", position);
         //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -101,30 +105,68 @@ public class Search_Results_Car extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-Log.d("on create view ","of card result called");
+        Log.d("on create view ", "of card result called");
         each_users.clear();
-        View v=inflater.inflate(R.layout.fragment_search__results, container, false);
+        View v = inflater.inflate(R.layout.fragment_search__results, container, false);
 
         SeachView = (RecyclerView) v.findViewById(R.id.rv);
-  //      swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        //      swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
 
         SeachView.setLayoutManager(new LinearLayoutManager(getActivity()));
         SeachView.setHasFixedSize(true);
         adapterSearchResult = new AdapterSearchResult(getActivity());
-        progressDialog=new ProgressDialog(getActivity());
-  //      swipeRefreshLayout.setOnRefreshListener(this);
+        progressDialog = new ProgressDialog(getActivity());
+        //      swipeRefreshLayout.setOnRefreshListener(this);
 
         DoJsonParsing();
 
 
-
         SeachView.setAdapter(adapterSearchResult);
 
+
+        final GestureDetector mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+        });
+
+
+        SeachView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+
+
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
+
+                    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+                    sendDataToNextActivity(recyclerView.getChildPosition(child));
+                    return true;
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 //        Bundle b=getArguments();
-  //      if(b!=null) {
+        //      if(b!=null) {
 //            Log.d("ride type is", b.getString("ride"));
-           // Log.d("position is", b.getInt("position") + "");
-    //    }
+        // Log.d("position is", b.getInt("position") + "");
+        //    }
            /* result= (ListView) v.findViewById(R.id.listView);
         ArrayAdapter<String> l=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
         result.setAdapter(l);
@@ -134,12 +176,25 @@ Log.d("on create view ","of card result called");
         return v;
     }
 
+    private void sendDataToNextActivity(int childPosition) {
+
+        each_users.get(childPosition);
+
+
+        Log.d("data in the arraylist is", each_users.get(childPosition).getUname() + "");
+        Intent i=new Intent(getActivity(),BookARide.class);
+        i.putExtra("user_data", each_users.get(childPosition));
+
+        startActivity(i);
+
+    }
+
     private void DoJsonParsing() {
 
 
-        final RequestParams requestParams=new RequestParams();
-        requestParams.add("Date","04-08-2015");
-        requestParams.add("Source","Nityanand Nagar, Mumbai, Maharashtra");
+        final RequestParams requestParams = new RequestParams();
+        requestParams.add("Date", "04-08-2015");
+        requestParams.add("Source", "Nityanand Nagar, Mumbai, Maharashtra");
         requestParams.add("Destination", "Nityanand Nagar, Mumbai, Maharashtra");
         GetData.post("", requestParams, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
@@ -151,38 +206,37 @@ Log.d("on create view ","of card result called");
 
                 try {
 
-                    JSONArray rides=response.getJSONArray("rides");
+                    JSONArray rides = response.getJSONArray("rides");
 
-                    for(int i=0;i<rides.length();i++) {
-                        Each_User each_user=new Each_User();
+                    for (int i = 0; i < rides.length(); i++) {
+                        ;
                         JSONObject data = rides.getJSONObject(i);
-                        String Uname=data.getString("id");
-                        String source=data.getString("source");
-                        String destination=data.getString("destination");
-                        String time=data.getString("time");
-                        String seats=data.getString("seats");
-                        String fare=data.getString("fare");
+                        String Uname = data.getString("id");
+                        String source = data.getString("source");
+                        String destination = data.getString("destination");
+                        String time = data.getString("time");
+                        String seats = data.getString("seats");
+                        String fare = data.getString("fare");
                         Log.d("parsed data is", Uname + source + destination + time + seats + fare);
 
-                        each_user.setUname(Uname);
+                        Each_User each_user = new Each_User(Uname,"",seats,"",fare,time,source,destination);
+
+/*                        each_user.setUname(Uname);
                         each_user.setUsource(source);
                         each_user.setUdestination(destination);
                         each_user.setUtime(time);
                         each_user.setUseat(seats);
-                        each_user.setUfare(fare);
+                        each_user.setUfare(fare);*/
 
                         each_users.add(each_user);
 
 
-
-
-                        Log.d("list size is",each_users.size()+"");
-
+                        Log.d("list size is", each_users.size() + "");
 
 
                     }
 
-      //              progressDialog.dismiss();
+                    //              progressDialog.dismiss();
                     adapterSearchResult.SetData(each_users);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -236,7 +290,7 @@ Log.d("on create view ","of card result called");
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-       //     mListener = (OnFragmentInteractionListener) activity;
+            //     mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");

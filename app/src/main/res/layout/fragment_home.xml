@@ -164,7 +164,7 @@
         android:id="@+id/mainIcon"
         android:layout_width="match_parent"
         android:layout_height="400.0dip"
-        android:src="@drawable/ic_laun" />
+        android:src="@drawable/ic_screen1" />
 
     <Button
         android:id="@+id/OfferRide"
