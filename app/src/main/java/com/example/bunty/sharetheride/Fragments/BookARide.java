@@ -1,8 +1,8 @@
 package com.example.bunty.sharetheride.Fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +23,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by bunty on 10/26/2015.
  */
-public class BookARide extends Activity implements View.OnClickListener {
+public class BookARide extends AppCompatActivity implements View.OnClickListener {
 
     EditText no_of_seats;
     Button book_A_Ride;
@@ -73,6 +73,8 @@ public class BookARide extends Activity implements View.OnClickListener {
                             Toast.makeText(getApplicationContext(), "reduce the number of seats", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "perfect", Toast.LENGTH_SHORT).show();
+                            callStatusOfRide();
+
                         }
 
 
@@ -100,5 +102,12 @@ public class BookARide extends Activity implements View.OnClickListener {
         } else {
             Toast.makeText(this, "Enter the correct no of seats to be booked", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void callStatusOfRide() {
+
+     RideStatus rideStatus=new RideStatus();
+        getSupportFragmentManager().beginTransaction().replace(R.id.book_a_ride,rideStatus).commit();
+
     }
 }

@@ -27,6 +27,7 @@ import com.example.bunty.sharetheride.AdapterDecorate.DividerItemDecoration;
 import com.example.bunty.sharetheride.Fragments.Find_A_Ride;
 import com.example.bunty.sharetheride.Fragments.Find_Ride_Search_Result;
 import com.example.bunty.sharetheride.Fragments.Home;
+import com.example.bunty.sharetheride.Fragments.RideStatus;
 import com.example.bunty.sharetheride.Interfaces.Communicator;
 import com.example.bunty.sharetheride.R;
 
@@ -337,6 +338,8 @@ else {
 
 
             case 4:
+                RideStatus rideStatus=new RideStatus();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, rideStatus).commit();
 /*
                 Intent waIntent = new Intent(Intent.ACTION_SEND);
                 waIntent.setType("text/plain");
