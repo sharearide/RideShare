@@ -104,7 +104,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
 
         View startLoc = (View)v.findViewById(R.id.startLocationLayout);
         View destLoc = (View)v.findViewById(R.id.endLocationLayout);
-        View boardLoc = (View)v.findViewById(R.id.stopOverLayout);
+       // View boardLoc = (View)v.findViewById(R.id.stopOverLayout);
 
         TextView toLabel = (TextView)destLoc.findViewById(R.id.fromLabel);
         toLabel.setText("TO: ");

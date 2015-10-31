@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.bunty.sharetheride.Adapter.AdapterSearchResult;
-import com.example.bunty.sharetheride.Each_User;
+import com.example.bunty.sharetheride.POJO.Each_User;
 import com.example.bunty.sharetheride.Network.GetData;
 import com.example.bunty.sharetheride.R;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -118,6 +118,8 @@ public class Search_Results_Car extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         //      swipeRefreshLayout.setOnRefreshListener(this);
 
+        progressDialog.setMessage("Fetching The File....");
+        progressDialog.show();
         DoJsonParsing();
 
 
@@ -196,13 +198,11 @@ public class Search_Results_Car extends Fragment {
         requestParams.add("Date", "04-08-2015");
         requestParams.add("Source", "Nityanand Nagar, Mumbai, Maharashtra");
         requestParams.add("Destination", "Nityanand Nagar, Mumbai, Maharashtra");
-        GetData.post("", requestParams, new BaseJsonHttpResponseHandler<JSONObject>() {
+        GetData.post("request_ride", requestParams, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 Log.d("data is", response + "");
 
-                progressDialog.setMessage("Fetching The File....");
-                progressDialog.show();
 
                 try {
 
@@ -272,6 +272,7 @@ public class Search_Results_Car extends Fragment {
 
             @Override
             protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                progressDialog.cancel();
                 JSONObject jsonObject = new JSONObject(rawJsonData);
                 return jsonObject;
             }

@@ -1,4 +1,4 @@
-package com.example.bunty.sharetheride;
+package com.example.bunty.sharetheride.POJO;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -7,6 +7,7 @@
     <string name="closeDrawer">close drawer</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="Book_A_Ride_Seat_Check_Availablity">get_seats</string>
     <string-array name="tabs">
 
         <item>CAR</item>

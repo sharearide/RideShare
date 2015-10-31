@@ -11,7 +11,7 @@ import com.loopj.android.http.RequestParams;
  */
 public class GetData {
 
-    private static final String BASE_URL = "http://allrounderservices.com/mypool/request.php?action=request_ride";
+    private static final String BASE_URL = "http://allrounderservices.com/mypool/request.php?action=";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bunty.sharetheride.Each_User;
+import com.example.bunty.sharetheride.POJO.Each_User;
 import com.example.bunty.sharetheride.R;
 
 import java.util.ArrayList;
