@@ -48,7 +48,7 @@ import java.util.Locale;
 public class Find_A_Ride extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
 
 
-    AutoCompleteTextView Fsource,Fdestination;
+    AutoCompleteTextView Fsource,Fdestination, Fboarding;
             EditText Fdate;
     ImageButton FsourceX,FdestinationX;
     Button Search;
@@ -83,6 +83,7 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         Fsource= (AutoCompleteTextView) v.findViewById(R.id.Fsource);
         Fdestination= (AutoCompleteTextView) v.findViewById(R.id.Fdestination);
+        Fboarding = (AutoCompleteTextView) v.findViewById(R.id.Fboarding);
         Fdate=(EditText) v.findViewById(R.id.Fdate);
         FsourceX= (ImageButton) v.findViewById(R.id.FsourceX);
         FdestinationX= (ImageButton) v.findViewById(R.id.FdestinationX);
@@ -116,6 +117,26 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
         });
 
         Fdestination.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                placesTask = new PlacesTask();
+                placesTask.execute(s.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        Fboarding.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -310,6 +331,7 @@ public class Find_A_Ride extends Fragment implements View.OnClickListener, View.
             // Setting the adapter
             Fsource.setAdapter(adapter);
             Fdestination.setAdapter(adapter);
+            Fboarding.setAdapter(adapter);
         }
     }
 

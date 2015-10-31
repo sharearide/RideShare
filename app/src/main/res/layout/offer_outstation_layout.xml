@@ -64,13 +64,13 @@
                 android:layout_below="@+id/stopOversParentLayout"
                 android:layout_marginTop="5.0dip" />
 
-            <include
+           <!-- <include
                 android:id="@+id/stopOverLayout"
                 layout="@layout/offer_stop_over_list_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/endLocationLayout"
-                android:layout_marginTop="5.0dip" />
+                android:layout_marginTop="5.0dip" />-->
         </RelativeLayout>
 
         <RelativeLayout

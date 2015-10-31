@@ -56,7 +56,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
     private String mParam2;
 
     //Layout Components
-    AutoCompleteTextView RSource, RDestination, RBoarding;
+    AutoCompleteTextView RSource, RDestination;// RBoarding;
     private DatePickerDialog FPickDate;
     private TimePickerDialog FPickTime;
     private SimpleDateFormat dateFormatter;
@@ -112,7 +112,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
         RSource = (AutoCompleteTextView)startLoc.findViewById(R.id.currentLocation);
         RDestination = (AutoCompleteTextView)destLoc.findViewById(R.id.currentLocation);
         RDestination.setHint("Destination");
-        RBoarding = (AutoCompleteTextView)boardLoc.findViewById(R.id.stopOverLocation);
+       // RBoarding = (AutoCompleteTextView)boardLoc.findViewById(R.id.stopOverLocation);
 
         RSource.addTextChangedListener(new TextWatcher() {
 
@@ -152,7 +152,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
                 // TODO Auto-generated method stub
             }
         });
-        RBoarding.addTextChangedListener(new TextWatcher() {
+       /* RBoarding.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -170,7 +170,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
             }
-        });
+        });*/
 
         //RelativeLayout dateTime = (RelativeLayout)v.findViewById(R.id.returnJourneyLayout);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
@@ -296,7 +296,7 @@ public class Offer_a_Ride extends Fragment implements View.OnClickListener, View
             // Setting the adapter
             RSource.setAdapter(adapter);
             RDestination.setAdapter(adapter);
-            RBoarding.setAdapter(adapter);
+           // RBoarding.setAdapter(adapter);
         }
     }
 

@@ -109,6 +109,27 @@
             android:inputType="date"
             android:paddingTop="10dp" />
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Fdate"
+            android:paddingTop="25dp"
+            android:text="BOARDING POINTS"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <com.example.bunty.sharetheride.AutoComplete.CustomAutoCompleteTextView
+            android:id="@+id/Fboarding"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="10dp"
+            android:hint="Stop Over" />
+
+
         <Button
             android:id="@+id/Fsearch"
             android:layout_width="fill_parent"

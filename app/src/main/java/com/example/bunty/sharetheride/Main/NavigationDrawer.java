@@ -398,6 +398,7 @@ else {
 
     }
 
+
     private boolean chechfblogin() {
         shared = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         haslognedinviafb = (shared.getBoolean("fblogin", false));
