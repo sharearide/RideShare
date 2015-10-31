@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.example.bunty.sharetheride.Adapter.AdapterData;
 import com.example.bunty.sharetheride.AdapterDecorate.DividerItemDecoration;
-import com.example.bunty.sharetheride.Fragments.Find_A_Ride;
 import com.example.bunty.sharetheride.Fragments.Find_Ride_Search_Result;
 import com.example.bunty.sharetheride.Fragments.Home;
 import com.example.bunty.sharetheride.Fragments.RideStatus;
@@ -45,10 +44,10 @@ public class NavigationDrawer extends AppCompatActivity implements Communicator
 
     String TITLES[] = {"User Profile",
             "Home",
-            "Find A Ride",
-            "Offer A Ride",
-            "Booking Requests",
-            "My Rdes"};
+            "Share",
+            "Rides Taken",
+            "Rides Offered",
+            "Logout"};
 
     int ICONS[] = {R.drawable.user,
             R.drawable.edit,
@@ -317,9 +316,9 @@ else {
 
             case 2:
 
-                Find_A_Ride find_a_ride=new Find_A_Ride();
+              /*  Find_A_Ride find_a_ride=new Find_A_Ride();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_a_ride).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_a_ride).commit();*/
                 /*fragmentTransaction.replace(R.id.frag, find_a_ride);
                 getSupportActionBar().setTitle("Select Worker");
                 fragmentTransaction.commit();*/
@@ -330,8 +329,10 @@ else {
 
 
             case 3:
+/*
                 Find_Ride_Search_Result find_ride_search_result=new Find_Ride_Search_Result();
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag, find_ride_search_result).commit();
+*/
 
 
                 break;
