@@ -155,16 +155,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.Ulogin:
                 hideSoftKeyboard(this);
                 RequestParams params = new RequestParams();
-                params.put("userEmail", uname.getText().toString());
+                params.put("user_email", uname.getText().toString());
                 params.put("password", upass.getText().toString());
                 if (!uname.getText().toString().equals("") && !upass.getText().toString().equals("")) {
                     progressDialog = new ProgressDialog(MainActivity.this);
                     progressDialog.setMessage("checking the credentials");
                     progressDialog.show();
                     progressDialog.setCancelable(false);
-                    GetData.post("", params, new BaseJsonHttpResponseHandler<JSONObject>() {
+                    GetData.post("login", params, new BaseJsonHttpResponseHandler<JSONObject>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
+                            Log.d("response is",response+"");
 
 
                         }
@@ -176,6 +177,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                         @Override
                         protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            Log.d("response in parseResponse is",rawJsonData);
                             JSONObject jsonObject = new JSONObject(rawJsonData);
                             progressDialog.cancel();
                             return jsonObject;
