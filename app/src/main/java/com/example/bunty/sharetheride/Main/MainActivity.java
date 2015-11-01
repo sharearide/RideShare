@@ -9,7 +9,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -25,18 +24,17 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -45,7 +43,6 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -63,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     Button login, fblogin;
     EditText uname, upass;
-    LoginButton loginButton;
+//    LoginButton loginButton;
     ProgressDialog progressDialog;
 
     String name, pass,facebookname, fid, femail, id, headerCode, errorMessage, U_verified,
@@ -77,14 +74,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
+  //      FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
         setlayout();
         getvariables();
-        fbkey();
+       /* fbkey();
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday, user_friends"));
-        loginButton.registerCallback(callbackManager, this);
+        loginButton.registerCallback(callbackManager, this);*/
         login.setOnClickListener(this);
 
 
@@ -164,8 +161,29 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     progressDialog = new ProgressDialog(MainActivity.this);
                     progressDialog.setMessage("checking the credentials");
                     progressDialog.show();
-                  //  GetData.post("login",params,new JsonHttpResponseHandler());
+                    progressDialog.setCancelable(false);
+                    GetData.post("", params, new BaseJsonHttpResponseHandler<JSONObject>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
 
+
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
+
+                        }
+
+                        @Override
+                        protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            JSONObject jsonObject = new JSONObject(rawJsonData);
+                            progressDialog.cancel();
+                            return jsonObject;
+                        }
+                    });
+                }
+                  //  GetData.post("login",params,new JsonHttpResponseHandler());
+/*
                     GetData.post("login", params, new JsonHttpResponseHandler() {
 
                         public void onSuccess(int statusCode, PreferenceActivity.Header[] headers, JSONObject response) {
@@ -219,7 +237,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     });
                 } else {
                     Toast.makeText(this, "enter the details", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
 
                 break;
@@ -446,13 +464,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void login() {
 
-        settings = getSharedPreferences(NavigationDrawer.PREFS_NAME, 0);
+/*        settings = getSharedPreferences(NavigationDrawer.PREFS_NAME, 0);
         boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
         if (hasLoggedIn) {
             Intent i = new Intent(this, NavigationDrawer.class);
             startActivity(i);
             MainActivity.this.finish();
-        }
+        }*/
     }
 
     @Override
